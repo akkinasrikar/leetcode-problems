@@ -1,12 +1,14 @@
 class Solution:
     def findLength(self, nums1: List[int], nums2: List[int]) -> int:
-        m,n=len(nums1),len(nums2)
-        dp=[[0]*(n+1) for i in range(m+1)]
-        Max=0
-        for i in range(m):
-            for j in range(n):
-                if nums1[i]==nums2[j]:
-                    dp[i+1][j+1]=1+dp[i][j]
-                    Max=max(Max,dp[i+1][j+1])
-        return Max
-        
+
+        nums2_str = ''.join([chr(x) for x in nums2])
+        max_str = ''
+        res = 0
+        for num in nums1:
+            max_str+=chr(num)
+            if max_str in nums2_str:
+                res = max(res,len(max_str))
+            else:
+                max_str = max_str[1:]
+
+        return res
