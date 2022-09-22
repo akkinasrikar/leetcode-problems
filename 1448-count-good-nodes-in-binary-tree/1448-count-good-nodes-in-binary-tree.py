@@ -5,18 +5,21 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    def __init__(self):
+        self.res=1
+    
     def goodNodes(self, root: TreeNode) -> int:
-        res=[1]
         m=root.val
-        def check(node,n):
-            if not node: return
-            if node.val>=n:
-                res.append(1)
-                n=node.val
-            check(node.left,n)
-            check(node.right,n)
-            return
-        check(root.left,m)
-        check(root.right,m)
-        return sum(res)
+        self.check(root.left,m)
+        self.check(root.right,m)
+        return self.res
+    def check(self,node,n):
+        if not node: return
+        if node.val>=n:
+            self.res += 1
+            n=node.val
+        self.check(node.left,n)
+        self.check(node.right,n)
+        return
+        
         
